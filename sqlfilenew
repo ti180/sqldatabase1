@@ -1,0 +1,84 @@
+import pymysql
+
+
+
+connection = pymysql.connect(host="localhost", user="admin", passwd="123456789") // Connecting
+to
+the
+server//
+'localhost'
+
+cursor.execute('CREATE DATABASE my_db') // Creating
+Database//
+my_db
+
+connection.close()
+
+//Connecting
+to
+database and creating
+Table//
+
+connection = pymysql.connect(host="localhost", user="admin", passwd="123456789", database="my_db") // Creating
+connetion
+to
+the
+database//
+
+cursor = connection.cursor()
+
+ArtistTableSql = """CREATE TABLE table1(												
+ID INT(20) PRIMARY KEY,
+STAT  CHAR(20) NOT NULL,
+NUM CHAR(10))"""
+
+cursor.execute(ArtistTableSql)
+
+
+
+// Inserting
+values
+into
+Database //
+
+insert1 = "INSERT INTO table1( ID,NAME, SCORE) VALUES('1','Jackson', '78' );" // Writing
+datas
+to
+the
+table
+
+cursor.execute(insert1)
+
+connection.commit()
+connection.close()
+
+
+
+//Reading
+Datas
+from table //
+
+connection = pymysql.connect(host="localhost", user="admin", passwd="123456789", database="my_db") // Creating
+connetion
+to
+the
+database//
+
+cursor = connection.cursor()
+
+cursor.execute('SELECT * FROM table1') // Reading
+all
+contents
+from
+
+'table1'//
+
+records = cursor.fetchall()
+
+for row in records:
+    print("ID = ", row[0],)
+    print("Name = ", row[1])
+    print("Score  = ", row[2])
+
+connection.close()
+cursor.close()
